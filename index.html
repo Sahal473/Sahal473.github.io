@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sahal Al-Shameeri — Electrical Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#080808;
+  --dark:#111111;
+  --card:#181818;
+  --border:#2a2a2a;
+  --yellow:#FFE500;
+  --orange:#FF6B00;
+  --white:#F5F5F5;
+  --gray:#888888;
+  --light-gray:#BBBBBB;
+  --font-display:'Bebas Neue',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:var(--font-body);line-height:1.6;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 3rem;
+  background:rgba(8,8,8,0.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:var(--font-display);font-size:1.5rem;letter-spacing:0.08em;
+  background:linear-gradient(90deg,var(--yellow),var(--orange));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  color:var(--gray);text-decoration:none;font-size:0.78rem;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--yellow)}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;display:flex;align-items:center;
+  position:relative;overflow:hidden;padding:7rem 3rem 5rem;
+}
+
+/* Electric grid background */
+.elec-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,229,0,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,229,0,0.04) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+
+/* Animated electric arcs (SVG paths simulated via CSS) */
+.arc-container{
+  position:absolute;right:0;top:0;bottom:0;width:52%;
+  pointer-events:none;overflow:hidden;
+}
+.arc-bolt{
+  position:absolute;
+  width:3px;background:linear-gradient(180deg,var(--yellow),var(--orange),transparent);
+  border-radius:2px;
+  filter:blur(0.5px);
+  animation:bolt-flash 3s ease-in-out infinite;
+  box-shadow:0 0 8px var(--yellow),0 0 20px rgba(255,229,0,0.4);
+}
+.arc-bolt:nth-child(1){height:180px;left:30%;top:15%;transform:rotate(12deg);animation-delay:0s}
+.arc-bolt:nth-child(2){height:120px;left:55%;top:35%;transform:rotate(-8deg);animation-delay:0.7s}
+.arc-bolt:nth-child(3){height:220px;left:20%;top:45%;transform:rotate(5deg);animation-delay:1.4s}
+.arc-bolt:nth-child(4){height:90px;left:70%;top:20%;transform:rotate(-15deg);animation-delay:2.1s}
+.arc-bolt:nth-child(5){height:160px;left:42%;top:60%;transform:rotate(20deg);animation-delay:0.3s}
+.arc-bolt:nth-child(6){height:100px;left:80%;top:55%;transform:rotate(-5deg);animation-delay:1.8s;background:linear-gradient(180deg,var(--orange),transparent)}
+
+/* Glow orb */
+.glow-orb{
+  position:absolute;right:18%;top:50%;transform:translateY(-50%);
+  width:380px;height:380px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,229,0,0.12) 0%,rgba(255,107,0,0.06) 40%,transparent 70%);
+  animation:orb-pulse 4s ease-in-out infinite;
+}
+@keyframes orb-pulse{0%,100%{transform:translateY(-50%) scale(1);opacity:0.7}50%{transform:translateY(-50%) scale(1.08);opacity:1}}
+@keyframes bolt-flash{0%,100%{opacity:0;transform:scaleY(0.3) rotate(var(--r,12deg))}20%,80%{opacity:1;transform:scaleY(1) rotate(var(--r,12deg))}50%{opacity:0.6}}
+
+.hero-content{position:relative;z-index:1;max-width:680px}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  font-family:var(--font-mono);font-size:0.72rem;color:var(--yellow);
+  letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1.2rem;
+  border:1px solid rgba(255,229,0,0.25);padding:0.3rem 0.8rem;border-radius:2px;
+  background:rgba(255,229,0,0.05);
+}
+.hero-eyebrow::before{content:'⚡';font-size:0.85rem}
+h1{
+  font-family:var(--font-display);
+  font-size:clamp(4rem,9vw,7.5rem);
+  line-height:0.92;letter-spacing:0.02em;
+  margin-bottom:0.6rem;color:var(--white);
+}
+h1 .accent{
+  display:block;
+  background:linear-gradient(90deg,var(--yellow) 0%,var(--orange) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-role{
+  font-family:var(--font-mono);font-size:0.85rem;color:var(--orange);
+  letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.5rem;
+}
+.hero-sub{
+  font-size:1rem;color:var(--gray);margin-bottom:2rem;
+  max-width:480px;line-height:1.75;
+}
+.hero-sub strong{color:var(--light-gray)}
+
+/* Award chips */
+.award-chips{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:2.2rem}
+.chip{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  font-family:var(--font-mono);font-size:0.7rem;
+  padding:0.35rem 0.8rem;border-radius:2px;letter-spacing:0.05em;
+}
+.chip-gold{background:rgba(255,229,0,0.12);border:1px solid rgba(255,229,0,0.4);color:var(--yellow)}
+.chip-orange{background:rgba(255,107,0,0.1);border:1px solid rgba(255,107,0,0.35);color:var(--orange)}
+.chip-gray{background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--gray)}
+
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.8rem 2rem;
+  background:linear-gradient(90deg,var(--yellow),var(--orange));
+  color:var(--black);font-family:var(--font-display);
+  font-size:1.1rem;letter-spacing:0.08em;
+  border:none;border-radius:2px;text-decoration:none;cursor:pointer;
+  transition:opacity 0.2s,transform 0.15s;
+  box-shadow:0 0 20px rgba(255,229,0,0.25);
+}
+.btn-primary:hover{opacity:0.9;transform:translateY(-2px);box-shadow:0 0 32px rgba(255,229,0,0.4)}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.8rem 2rem;background:transparent;color:var(--white);
+  font-family:var(--font-display);font-size:1.1rem;letter-spacing:0.08em;
+  border:1px solid var(--border);border-radius:2px;text-decoration:none;
+  transition:border-color 0.2s,color 0.2s;
+}
+.btn-outline:hover{border-color:var(--yellow);color:var(--yellow)}
+
+/* ── SECTIONS ── */
+section{padding:6rem 3rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{
+  font-family:var(--font-mono);font-size:0.68rem;color:var(--orange);
+  letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem;
+}
+.section-title{
+  font-family:var(--font-display);font-size:clamp(2.5rem,5vw,3.8rem);
+  line-height:1;letter-spacing:0.04em;margin-bottom:0.5rem;
+}
+.section-title span{
+  background:linear-gradient(90deg,var(--yellow),var(--orange));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.section-rule{width:4rem;height:3px;background:linear-gradient(90deg,var(--yellow),var(--orange));margin-bottom:3rem}
+
+/* ── ABOUT ── */
+#about{background:var(--dark)}
+.about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:5rem;align-items:start}
+.about-text p{color:var(--gray);line-height:1.85;margin-bottom:1.1rem;font-size:0.96rem}
+.about-text p strong{color:var(--white)}
+.about-text p em{color:var(--yellow);font-style:normal}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.stat-card{
+  background:var(--card);border:1px solid var(--border);border-radius:3px;
+  padding:1.5rem;position:relative;overflow:hidden;
+}
+.stat-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--yellow),var(--orange));
+}
+.stat-num{
+  font-family:var(--font-display);font-size:2.8rem;line-height:1;
+  background:linear-gradient(135deg,var(--yellow),var(--orange));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:0.25rem;
+}
+.stat-label{font-size:0.75rem;color:var(--gray);font-weight:500;letter-spacing:0.04em;line-height:1.4}
+
+/* ── PROJECTS ── */
+#projects{background:var(--black)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1.2rem}
+.project-card{
+  background:var(--card);border:1px solid var(--border);border-radius:3px;
+  padding:1.8rem;position:relative;overflow:hidden;
+  transition:border-color 0.25s,transform 0.2s,box-shadow 0.25s;
+}
+.project-card:hover{
+  border-color:var(--yellow);transform:translateY(-4px);
+  box-shadow:0 8px 40px rgba(255,229,0,0.1);
+}
+.project-num{
+  font-family:var(--font-display);font-size:3.5rem;line-height:1;
+  color:rgba(255,229,0,0.06);position:absolute;top:1rem;right:1.2rem;
+  letter-spacing:0.02em;pointer-events:none;
+}
+.project-icon{font-size:1.6rem;margin-bottom:1rem;display:block}
+.project-type{
+  font-family:var(--font-mono);font-size:0.65rem;color:var(--orange);
+  letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.6rem;
+}
+.project-title{
+  font-family:var(--font-display);font-size:1.3rem;letter-spacing:0.03em;
+  color:var(--white);margin-bottom:0.8rem;line-height:1.1;
+}
+.project-desc{font-size:0.86rem;color:var(--gray);line-height:1.75;margin-bottom:1.3rem}
+.project-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+.tag{
+  font-family:var(--font-mono);font-size:0.62rem;padding:0.22rem 0.55rem;
+  background:rgba(255,229,0,0.05);border:1px solid rgba(255,229,0,0.12);
+  border-radius:2px;color:var(--gray);letter-spacing:0.04em;
+}
+.project-card:hover .tag{border-color:rgba(255,229,0,0.25);color:var(--light-gray)}
+
+/* ── EXPERIENCE ── */
+#experience{background:var(--dark)}
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{
+  content:'';position:absolute;left:0;top:0.5rem;bottom:0;
+  width:2px;
+  background:linear-gradient(to bottom,var(--yellow),var(--orange),rgba(255,107,0,0.1));
+}
+.timeline-item{position:relative;margin-bottom:2.8rem}
+.timeline-dot{
+  position:absolute;left:-2.4rem;top:0.3rem;
+  width:12px;height:12px;border-radius:50%;
+  background:var(--yellow);
+  box-shadow:0 0 0 3px var(--dark),0 0 12px rgba(255,229,0,0.6);
+}
+.timeline-period{
+  font-family:var(--font-mono);font-size:0.68rem;color:var(--orange);
+  letter-spacing:0.1em;margin-bottom:0.3rem;
+}
+.timeline-title{
+  font-family:var(--font-display);font-size:1.35rem;letter-spacing:0.04em;
+  color:var(--white);margin-bottom:0.1rem;
+}
+.timeline-org{font-size:0.82rem;color:var(--gray);margin-bottom:0.7rem;font-style:italic}
+.timeline-points{list-style:none;display:flex;flex-direction:column;gap:0.35rem}
+.timeline-points li{
+  font-size:0.85rem;color:var(--gray);line-height:1.65;
+  padding-left:1.1rem;position:relative;
+}
+.timeline-points li::before{
+  content:'⚡';position:absolute;left:0;font-size:0.65rem;top:0.18rem;
+}
+
+/* ── SKILLS ── */
+#skills{background:var(--black)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem}
+.skill-group{
+  background:var(--card);border:1px solid var(--border);border-radius:3px;
+  padding:1.5rem;transition:border-color 0.2s;
+}
+.skill-group:hover{border-color:rgba(255,229,0,0.2)}
+.skill-group-icon{
+  font-size:1.4rem;margin-bottom:0.9rem;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:2.4rem;height:2.4rem;background:rgba(255,229,0,0.07);
+  border:1px solid rgba(255,229,0,0.15);border-radius:3px;
+}
+.skill-group-title{
+  font-family:var(--font-display);font-size:1.1rem;letter-spacing:0.05em;
+  color:var(--white);margin-bottom:1rem;
+}
+.skill-pills{display:flex;flex-wrap:wrap;gap:0.4rem}
+.skill-pill{
+  font-family:var(--font-mono);font-size:0.68rem;padding:0.28rem 0.6rem;
+  background:rgba(255,255,255,0.03);border:1px solid var(--border);
+  border-radius:2px;color:var(--light-gray);letter-spacing:0.03em;
+  transition:background 0.15s,border-color 0.15s;
+}
+.skill-pill:hover{background:rgba(255,229,0,0.07);border-color:rgba(255,229,0,0.25);color:var(--yellow)}
+
+/* ── CONTACT ── */
+#contact{
+  background:var(--dark);
+  position:relative;overflow:hidden;
+}
+.contact-glow{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:600px;height:300px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(255,229,0,0.05) 0%,transparent 70%);
+  pointer-events:none;
+}
+.contact-inner{max-width:640px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.contact-inner .section-rule{margin:0 auto 3rem}
+.contact-sub{color:var(--gray);font-size:1rem;line-height:1.8;margin-bottom:2.5rem}
+.contact-sub strong{color:var(--white)}
+.contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:1.2rem}
+.contact-link{
+  display:flex;align-items:center;gap:0.55rem;
+  font-family:var(--font-mono);font-size:0.8rem;color:var(--gray);
+  text-decoration:none;padding:0.7rem 1.3rem;
+  border:1px solid var(--border);border-radius:2px;
+  transition:color 0.2s,border-color 0.2s,background 0.2s;
+}
+.contact-link:hover{color:var(--yellow);border-color:rgba(255,229,0,0.35);background:rgba(255,229,0,0.04)}
+.contact-link svg{width:15px;height:15px;fill:currentColor;flex-shrink:0}
+
+/* ── FOOTER ── */
+footer{
+  text-align:center;padding:1.5rem;
+  border-top:1px solid var(--border);
+  font-family:var(--font-mono);font-size:0.68rem;color:var(--gray);
+  letter-spacing:0.06em;background:var(--black);
+}
+footer span{color:var(--yellow)}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.55s ease,transform 0.55s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+
+/* ── VOLTAGE LINE (decorative section separator) ── */
+.voltage-sep{
+  width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--yellow),var(--orange),transparent);
+  opacity:0.15;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+}
+@media(max-width:700px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  #hero{padding:6rem 1.5rem 4rem}
+  section{padding:4rem 1.5rem}
+  .timeline{padding-left:1.6rem}
+  .timeline-dot{left:-1.9rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .arc-bolt,.glow-orb{animation:none}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">⚡ SAHAL</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="elec-grid" aria-hidden="true"></div>
+  <div class="arc-container" aria-hidden="true">
+    <div class="glow-orb"></div>
+    <div class="arc-bolt"></div>
+    <div class="arc-bolt"></div>
+    <div class="arc-bolt"></div>
+    <div class="arc-bolt"></div>
+    <div class="arc-bolt"></div>
+    <div class="arc-bolt"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Electrical Engineer</div>
+    <h1>SAHAL<span class="accent">AL-SHAMEERI</span></h1>
+    <div class="hero-role">Electronic Defense · RF & Antenna · UAV Systems · AI</div>
+    <p class="hero-sub">
+      Honor graduate from <strong>KFUPM</strong>. International UAV competition champion.
+      Building systems where hardware meets intelligence — from antenna design to deep learning.
+    </p>
+    <div class="award-chips">
+      <span class="chip chip-gold">⚡ SUAS 2024 — 1st Place</span>
+      <span class="chip chip-orange">🏅 SUAS 2025 — 3rd Place</span>
+      <span class="chip chip-gray">GPA 3.6 / 4.0 · Honor</span>
+      <span class="chip chip-gray">GACA107 Drone Pilot</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">⚡ View My Work</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<div class="voltage-sep"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">01 — About</div>
+    <h2 class="section-title">WHO <span>I AM</span></h2>
+    <div class="section-rule"></div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm <strong>Sahal Al-Shameeri</strong>, an Electrical Engineering honor graduate from <strong>King Fahd University of Petroleum and Minerals (KFUPM)</strong>, specializing in <em>Electronic Defense</em>.</p>
+        <p>My work lives at the intersection of <strong>hardware precision</strong> and <strong>intelligent systems</strong> — designing RF antennas, tuning flight control algorithms, commissioning industrial power systems, and training deep learning models.</p>
+        <p>As <strong>Team Captain and Flight Control Lead</strong> for the UAS2030 drone team, I led a multidisciplinary group to back-to-back international competition placements — 1st at SUAS 2024, 3rd at SUAS 2025.</p>
+        <p>Beyond university, I've trained across drilling-rig electrical systems in Oman, analog IC design at KACST, AI specialization at KAUST Academy, and ESP manufacturing in Shanghai — giving me a global and deeply practical engineering foundation.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card reveal reveal-delay-1">
+          <div class="stat-num">3.6</div>
+          <div class="stat-label">GPA — Honor Graduate, KFUPM</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-2">
+          <div class="stat-num">1st</div>
+          <div class="stat-label">Place — SUAS 2024 International</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-3">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Major Engineering Projects</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-1">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Industrial Training Programs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="voltage-sep"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">02 — Projects</div>
+    <h2 class="section-title">WHAT I'VE <span>BUILT</span></h2>
+    <div class="section-rule"></div>
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="project-num">01</div>
+        <span class="project-icon">🚁</span>
+        <div class="project-type">UAV / Competition</div>
+        <div class="project-title">UAS2030 DRONE TEAM</div>
+        <p class="project-desc">Team Captain and Flight Control Lead for an internationally ranked UAV team. Designed flight control algorithms, led system testing, and contributed to PCB design for power distribution and battery integration.</p>
+        <div class="project-tags">
+          <span class="tag">Flight Control</span><span class="tag">PCB Design (KiCad)</span>
+          <span class="tag">PID Tuning</span><span class="tag">Systems Integration</span>
+          <span class="tag">Team Leadership</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-num">02</div>
+        <span class="project-icon">📡</span>
+        <div class="project-type">RF / Antenna Design</div>
+        <div class="project-title">DUAL-FREQ UAV ANTENNA</div>
+        <p class="project-desc">Designed and simulated a dual-frequency planar monopole antenna for UAV communication links using ANSYS HFSS. Optimized bandwidth and radiation pattern performance across both target frequency bands.</p>
+        <div class="project-tags">
+          <span class="tag">ANSYS HFSS</span><span class="tag">RF Design</span>
+          <span class="tag">Antenna Simulation</span><span class="tag">Bandwidth Optimization</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-num">03</div>
+        <span class="project-icon">🤖</span>
+        <div class="project-type">Deep Learning / CV</div>
+        <div class="project-title">DRONE & BIRD DETECTION</div>
+        <p class="project-desc">Built a real-time YOLO-based object detection model to classify drones vs. birds in aerial imagery. Covered the full pipeline — dataset annotation, model training, and performance evaluation.</p>
+        <div class="project-tags">
+          <span class="tag">YOLO</span><span class="tag">Python</span>
+          <span class="tag">Deep Learning</span><span class="tag">Dataset Annotation</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-num">04</div>
+        <span class="project-icon">⚡</span>
+        <div class="project-type">Power Systems / Control</div>
+        <div class="project-title">LOAD FREQUENCY CONTROL</div>
+        <p class="project-desc">Modeled and simulated a load-frequency control system for a renewable energy grid in Simulink. Evaluated controller stability and performance under varying operating conditions.</p>
+        <div class="project-tags">
+          <span class="tag">Simulink</span><span class="tag">Control Systems</span>
+          <span class="tag">Power Systems</span><span class="tag">Renewable Energy</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-num">05</div>
+        <span class="project-icon">🔊</span>
+        <div class="project-type">Signal Processing / ML</div>
+        <div class="project-title">AUDIO SIGNAL CLASSIFIER</div>
+        <p class="project-desc">Built and validated an end-to-end audio classification workflow on the Free-Spoken Digit Dataset, applying signal processing and machine learning for robust spoken-digit recognition.</p>
+        <div class="project-tags">
+          <span class="tag">Signal Processing</span><span class="tag">Python</span>
+          <span class="tag">Machine Learning</span><span class="tag">Audio Classification</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-num">06</div>
+        <span class="project-icon">🏎️</span>
+        <div class="project-type">Aerodynamics / Design</div>
+        <div class="project-title">ACTIVE AERO — F1 CARS</div>
+        <p class="project-desc">Developed an active aerodynamic surface concept for Formula One vehicles and assessed its quantitative effect on downforce and aerodynamic performance across speed conditions.</p>
+        <div class="project-tags">
+          <span class="tag">Aerodynamics</span><span class="tag">Concept Design</span>
+          <span class="tag">Performance Analysis</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="voltage-sep"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">03 — Experience</div>
+    <h2 class="section-title">WHERE I'VE <span>WORKED</span></h2>
+    <div class="section-rule"></div>
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Jun. 2025 – Aug. 2025</div>
+        <div class="timeline-title">ESP Manufacturing Training</div>
+        <div class="timeline-org">Alkhorayef Petroleum — Shanghai, China</div>
+        <ul class="timeline-points">
+          <li>Participated in Electric Submersible Pump assembly, inspection, testing, and quality-control</li>
+          <li>Troubleshot manufacturing and production issues to ensure equipment reliability</li>
+          <li>Applied engineering principles to improve manufacturing efficiency and equipment performance</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Sep. 2024 – Jan. 2025</div>
+        <div class="timeline-title">AI Specialization</div>
+        <div class="timeline-org">KAUST Academy</div>
+        <ul class="timeline-points">
+          <li>Completed coursework in machine learning, deep learning, generative AI, and applications</li>
+          <li>Developed practical skills in AI model training, evaluation, and deployment</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Jun. 2024 – Aug. 2024</div>
+        <div class="timeline-title">Rig Manufacturing Training</div>
+        <div class="timeline-org">BENTEC & KCA Deutag — Nizwa, Oman</div>
+        <ul class="timeline-points">
+          <li>Assembled, wired, inspected, and commissioned drilling-rig electrical systems</li>
+          <li>Performed troubleshooting and diagnostics on power distribution and control systems</li>
+          <li>Supported preventive maintenance, system testing, and industrial safety procedures</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Jun. 2024 – Jul. 2024</div>
+        <div class="timeline-title">Operational Amplifier Design Program</div>
+        <div class="timeline-org">KACST</div>
+        <ul class="timeline-points">
+          <li>Designed, simulated, and analyzed op-amp circuits using the SkyWater 130nm PDK (SKY130)</li>
+          <li>Applied analog CMOS design principles using Xschem and ngspice simulation tools</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Nov. 2023 – Apr. 2026</div>
+        <div class="timeline-title">Team Captain & Flight Control Lead</div>
+        <div class="timeline-org">UAS2030 Drone Team — Dhahran, KSA & Maryland, USA</div>
+        <ul class="timeline-points">
+          <li>Led team to 1st place at SUAS 2024 and 3rd place at SUAS 2025 international competitions</li>
+          <li>Directed team coordination, planning, and technical decisions as Team Captain</li>
+          <li>Designed and tuned flight control algorithms; led testing, debugging, and optimization</li>
+          <li>Contributed to PCB design for power distribution and battery integration</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Aug. 2022 – Dec. 2022</div>
+        <div class="timeline-title">Assistant Instructor — Intro to Programming</div>
+        <div class="timeline-org">KFUPM (Python & C Language Course)</div>
+        <ul class="timeline-points">
+          <li>Supported students with debugging, problem-solving, and code organization across lab sessions</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="voltage-sep"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">04 — Skills</div>
+    <h2 class="section-title">MY <span>TOOLKIT</span></h2>
+    <div class="section-rule"></div>
+    <div class="skills-grid">
+
+      <div class="skill-group reveal">
+        <div class="skill-group-icon">⚙️</div>
+        <div class="skill-group-title">Hardware & Circuit Design</div>
+        <div class="skill-pills">
+          <span class="skill-pill">PCB Design (KiCad)</span>
+          <span class="skill-pill">Analog Circuit Design</span>
+          <span class="skill-pill">CMOS Design</span>
+          <span class="skill-pill">Op-Amp Design</span>
+          <span class="skill-pill">SKY130 PDK</span>
+          <span class="skill-pill">Xschem</span>
+          <span class="skill-pill">ngspice</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group-icon">📡</div>
+        <div class="skill-group-title">RF & Antenna Engineering</div>
+        <div class="skill-pills">
+          <span class="skill-pill">ANSYS HFSS</span>
+          <span class="skill-pill">Antenna Simulation</span>
+          <span class="skill-pill">RF System Design</span>
+          <span class="skill-pill">Bandwidth Optimization</span>
+          <span class="skill-pill">Radiation Pattern Analysis</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group-icon">🚁</div>
+        <div class="skill-group-title">UAV & Embedded Systems</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Flight Control Algorithms</span>
+          <span class="skill-pill">PID Tuning</span>
+          <span class="skill-pill">Embedded Systems</span>
+          <span class="skill-pill">Power Distribution</span>
+          <span class="skill-pill">Simulink</span>
+          <span class="skill-pill">GACA107 Licensed</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group-icon">🤖</div>
+        <div class="skill-group-title">AI & Programming</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">Machine Learning</span>
+          <span class="skill-pill">Deep Learning</span>
+          <span class="skill-pill">YOLO</span>
+          <span class="skill-pill">Signal Processing</span>
+          <span class="skill-pill">Assembly Language</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group-icon">⚡</div>
+        <div class="skill-group-title">Power & Industrial Systems</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Power Systems</span>
+          <span class="skill-pill">Power Distribution</span>
+          <span class="skill-pill">Control Systems</span>
+          <span class="skill-pill">Diagnostics & Troubleshooting</span>
+          <span class="skill-pill">Preventive Maintenance</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group-icon">🏅</div>
+        <div class="skill-group-title">Certifications</div>
+        <div class="skill-pills">
+          <span class="skill-pill">GACA107 Drone Pilot</span>
+          <span class="skill-pill">Huawei HCIA-AI</span>
+          <span class="skill-pill">KAUST AI Specialization</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="voltage-sep"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-glow" aria-hidden="true"></div>
+  <div class="section-inner contact-inner">
+    <div class="section-label" style="display:block;text-align:center">05 — Contact</div>
+    <h2 class="section-title reveal" style="text-align:center">LET'S <span>CONNECT</span></h2>
+    <div class="section-rule"></div>
+    <p class="contact-sub reveal">
+      Actively exploring opportunities in <strong>defense, aerospace, oil & gas, and UAV engineering</strong>.<br>
+      Looking for a role where hardware precision meets smart systems? Let's talk.
+    </p>
+    <div class="contact-links reveal">
+      <a href="mailto:sahalalshumayri@gmail.com" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        sahalalshumayri@gmail.com
+      </a>
+      <a href="tel:+966532487866" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        +966 53 248 7866
+      </a>
+      <a href="#" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Jeddah, Saudi Arabia
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>⚡ <span>Sahal Al-Shameeri</span> — Electrical Engineer &nbsp;·&nbsp; Jeddah, Saudi Arabia</p>
+</footer>
+
+<script>
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold: 0.1, rootMargin:'0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Nav active highlight
+const sections = document.querySelectorAll('section[id]');
+const links = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if(window.scrollY >= s.offsetTop - 130) cur = s.id; });
+  links.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + cur); });
+}, { passive: true });
+</script>
+</body>
+</html>
